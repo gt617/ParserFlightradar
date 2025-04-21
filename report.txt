@@ -1,0 +1,1 @@
+Count of flights in the last hour with parametrs(airline='Turkish Airlines', model='Boeing 737-8F2'): 3
