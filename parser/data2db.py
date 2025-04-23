@@ -1,21 +1,22 @@
 import psycopg2
+import os
 
-from config import host, user, password, db_name
 from my_parser import get_flights_information
 
 
 try:
     connection = psycopg2.connect(
-        host=host,
-        user=user,
-        password=password,
-        database=db_name
+        user=os.getenv('POSTGRES_USER'),
+        password=os.getenv('POSTGRES_PASSWORD'),
+        database=os.getenv('POSTGRES_DB'),
+        port=os.getenv('DB_PORT'),
+        host=os.getenv('DB_HOST')
     )
 
     with connection.cursor() as cursor:
         cursor.execute(
             """CREATE TABLE IF NOT EXISTS flights (
-                record_time VARCHAR(50) NOT NULL,
+                record_time TIME NOT NULL,
                 collsing VARCHAR(10) NOT NULL,
                 icao VARCHAR(5) NOT NULL,
                 model VARCHAR(50) NOT NULL,
