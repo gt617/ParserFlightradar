@@ -18,19 +18,34 @@
 - latitude - широта на момент записи (float)
 - longitude - долгота на момент записи (float)
 
-Установка зависимостей:```pip install -r requirements.txt```
-Запуск сбора данных: ```python data2db.py```
-
 ## Файл make_report.py:
 
-Создает отчет о колчичестве рейсов за последний час (по параметрам airline и model).
+Создает таблицу hourly_report с отчетом о колчичестве рейсов за последний час (по параметрам airline и model).
 
-## Пример файла config.py:
+Структура таблицы:
+
+- airline - название авиакомпании (varchar)
+- model - модель самолета (varchar)
+- count - кол-во рейсов данной модели и данной авиакампании за последний час (varchar)
+
+## Пример файла .env:
 
 ```
-host = 'localhost'
-user = 'your_user'
-password = 'your_password'
-db_name = 'your_db'
+POSTGRES_PASSWORD=your_pswd
+POSTGRES_DB=your_db
+POSTGRES_USER=your_user
+PGUSER=your_user
+DB_HOST=db
+DB_PORT=5432
 ```
 
+## Запуск проекта:
+```
+docker compose up -d
+```
+Просмотр таблиц:
+```
+docker compose exec -it db psql
+>>>\dt
+>>>SELECT * FROM <название таблицы>;
+```
